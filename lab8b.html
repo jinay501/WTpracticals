@@ -1,0 +1,24 @@
+<html>
+<body>
+    <input style = "margin-top: 230px; margin-left: 540px; width: 200px; height: 70px;" type="button" value="Play" onclick="StartPlay()">
+
+    <script>
+        function StartPlay() {
+            var generated_num=parseInt(Math.random() * 200);
+            console.log(generated_num);
+            var n=prompt("Guess the number:");
+            for (let index = 0; index < 4; index++) {
+                if (n==generated_num){
+                    document.body.style.backgroundColor="Yellow";
+                    alert("Correct Guess!!!");
+                    break;
+                }
+                else{
+                    document.body.style.backgroundColor="Orange";
+                    n=prompt("Try again:");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

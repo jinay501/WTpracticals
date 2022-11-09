@@ -1,0 +1,25 @@
+<html>
+    <body style = "background-color: brown; font-family:Serif; color:white; text-align: center; font-size: xx-large;">
+        <script>
+            let names = [];
+            let i = 0;
+            while (true) 
+            {
+                names[i] = prompt("Enter 'End or end ' To stop");
+                if (names[i] == "END" || names[i] == "end") 
+                {
+                    break
+                }
+                i++;
+            }
+            names.pop();
+            names.sort();
+            document.write("Sorted Names are :- <br><br>");
+            for (j = 0; j < i; j++) 
+            {
+                document.write(names[j]);
+                document.write("<br>");
+            }
+        </script>
+    </body>
+</html>

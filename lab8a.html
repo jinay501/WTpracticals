@@ -1,0 +1,22 @@
+<html>
+  <style>
+    .highlightme { background-color:#FFFF00; }
+  </style>
+  <body style = "background-color:brown; color: white;">
+
+<center>
+    <input type="number" placeholder="Enter The Value : " value="" onchange="money(this.value)">
+    <script>
+    notes=[2000,500,100,50,20,5,2,1]
+    str=""
+    function money(n){
+      for (var i = 0; i < notes.length; i++) {
+        str=str+notes[i]+"'s : "+(parseInt(parseInt(n)/notes[i]))+"<br>";
+        n=n-(parseInt(parseInt(n)/notes[i]))*notes[i]
+      }
+      document.write("<b>Answer : </b>"+"<br>"+str)
+    }
+    </script>
+</center>
+  </body>
+</html>

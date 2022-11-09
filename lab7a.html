@@ -1,0 +1,26 @@
+<html>
+ 
+<script type="text/javascript">
+  function reverse_num() {
+    var num = parseInt(prompt("Enter the number to be reveresed :"));
+    var n = num;
+    var rev = 0, rem;
+
+    while (n > 0) {
+
+      rem = n % 10;
+      rev = rev * 10 + rem;
+      n = Math.floor(n / 10);
+    }
+    document.write("<span class='highlightme'> Entered Number : " + num + " <br><br> Reversed Number : " + rev + "</span>\n");
+  }
+</script>
+
+<body style="font-size: 20px; text-color:white; font-family:Serif; text-align: left; background-color:brown;">
+      <br><br>
+      <script>
+        reverse_num()
+      </script>
+    </span>
+</body>
+</html>

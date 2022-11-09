@@ -1,0 +1,28 @@
+<html>
+    <body>
+        <script>
+            function time()
+            {
+                var time=new Date();
+                var hrs=time.getHours();
+                var mins=time.getMinutes();
+                var sec=time.getSeconds();
+                if(time.getHours()<12)
+                {
+                    document.write('Morning'+" "+time);
+                }
+                else if(time.getHours()>=12&time.getHours()<=18)
+                {
+                    document.write('Afternoon'+" "+time);
+                }
+                else
+                {
+                    document.write('Evening'+" "+time);
+                }
+            }
+        </script>
+        <button onclick="time()">
+            Click button to view time
+        </button>
+    </body>
+</html>
