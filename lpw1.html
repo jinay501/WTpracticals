@@ -1,0 +1,146 @@
+    <head>
+        <style>
+            .formstyle{
+                border: 1px solid black;
+                margin-left: 250px;
+                padding: 50px;
+                width: 50%;
+                align-items: center;
+                height: 100%;
+            }
+            body{
+                align: center;
+            }
+            table{
+                bottom: 1px solid red;
+            }
+            td{ border: none;
+            align-items: left;}
+        </style>
+
+    </head>
+    <body>
+        <div class="formstyle">
+        <h1>Your Items</h1>
+        <label>Item Name</label>
+        <input type="text" id="item">
+        <br><br>
+        <label>Item Description</label>
+        <textarea rows="3" id="description"></textarea>
+        <br><br>
+        <button style="color: orange;" id="add">Add</button>
+        <button style="color: orange;" id="clear" onclick="clearlist12()">Clear</button>
+        <!-- <input type="button"> -->
+        <br>
+        <h2>Added Items</h2>
+        <table>
+            <tr>
+                <td style="width:40px;">SN</td>
+                <td style="width:150px;">Item Name</td>
+                <td style="width:350px;">Item Description</td>
+                <td style="width:100px;">Action</td>
+            </tr>
+            <!--The tbody tag is used to group the body content in an HTML table -->
+            <tbody id = "tableBody">
+            <tr style="border-top: 1px solid gray;">
+                <td style="border-top: 1px solid gray;">1</td>
+                <td style="border-top: 1px solid gray;">HeadPhone</td>
+                <td style="border-top: 1px solid gray;">Very good headphone</td>
+                <td style="border-top: 1px solid gray;"><button>Remove</button></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <script>
+        function updateandset()//when eventlister is running then  only this function get called
+        //if you dont write this function then while deleting the item from the list it will empty the items 
+        //but will not remove from the table 
+        {
+            console.log("adding items");
+            tit=document.getElementById('item').value;
+            desc=document.getElementById('description').value;
+        ////if first time adding item then create it and push in the declared array
+            if(localStorage.getItem('itemsJson')==null)//by default local itemJon null
+            {
+                itemJsonArray = [];
+                itemJsonArray.push([tit,desc]);
+                localStorage.setItem('itemsJson',JSON.stringify(itemJsonArray));
+                //stored in local stoarage as array
+                
+            }
+            //if already existing in your in itemsJson then parse it and add to our array itemJsonArray
+            else{
+                //if already added many elements
+                itemJsonArraystr = localStorage.getItem('itemsJson');//from itemsJson take item
+                itemJsonArray = JSON.parse(itemJsonArraystr);//parse itemsJson (may have many entries) 
+                itemJsonArray.push([tit,desc]);//put entry in the array
+                localStorage.setItem('itemsJson',JSON.stringify(itemJsonArray));
+
+            }
+            update1();//by default call 
+        }
+        //update1() will update the itemJsonArray
+        //when new user come it must reflect all the added items
+
+        function update1()
+        {
+            //if i dont declare here itemjson array so it will throw error that itemJsonArray not declared
+            if(localStorage.getItem('itemsJson')==null)
+            {
+                itemJsonArray = [];
+                localStorage.setItem('itemsJson',JSON.stringify(itemJsonArray));
+            }
+            else{
+                itemJsonArraystr = localStorage.getItem('itemsJson');//from itemsJson take item
+                itemJsonArray = JSON.parse(itemJsonArraystr);//parse itemsJson (may have many entries) 
+            }
+            //populate table
+            //object create to get data from table row
+        let tableBody = document.getElementById('tableBody');//its a table body
+        let str="";//blankd=k string
+        //in array itemJsonArray , each entry is fetched and those element values are stored in td 
+        //back ticks
+        //Template Literals use back-ticks (``) rather than the quotes ("") to define a string:
+        //Template literals allows multiline strings:
+        itemJsonArray.forEach((element, index) => {
+            str +=`
+            <tr>
+                <td>${index+1}</td>
+                <td>${element[0]}</td>
+                <td>${element[1]}</td>
+                 <td><button style="color: orange;" onclick="delete1(${index})">Remove</button></td>
+            </tr>`;
+            //we want to print in rows of table
+           
+        });
+ 			tableBody.innerHTML = str;
+        }
+        //click on add button will add item in the array and also display in the table
+        add=document.getElementById("add");
+        add.addEventListener("click",updateandset);
+        update1();
+
+        //
+        function delete1(item){
+            console.log("delete",item);
+            //fetch item json array
+            itemJsonArraystr = localStorage.getItem('itemsJson');//from itemsJson take item
+                itemJsonArray = JSON.parse(itemJsonArraystr);//parse itemsJson (may have many entries)
+                // spice(index_fromwhere_to_start_splicing, how_many_elements)
+                itemJsonArray.splice(item,1); 
+                localStorage.setItem('itemsJson',JSON.stringify(itemJsonArray));
+                update1();
+        }
+   function clearlist12()
+   {
+    if(confirm("do yu really want to clear")){
+    console.log("clearing list");
+    localStorage.clear();
+    update1();}
+   };
+        
+    </script>
+   
+    </body>
+ 
+</Html>
